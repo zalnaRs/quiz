@@ -1,0 +1,26 @@
+{% extends "base.html" %} {% block content %}
+
+<span id="clock" class="position-fixed m-4 shadow-sm rounded py-1 px-2 top-0 end-0"></span>
+    <script>
+    window.addEventListener("load", function() {
+      const clock = document.querySelector("#clock")
+      setInterval(function() {
+        const date = new Date();
+        clock.innerHTML = `${date.getHours().toString().padStart(2, "0")}:${date.getMinutes().toString().padStart(2, "0")}:${date.getSeconds().toString().padStart(2, "0")}` 
+      }, 1000)
+    })
+    </script>
+<main class="container d-flex justify-content-center align-items-center flex-column py-4">
+  <h1 class="mb-4">Óralevezető kérdéssor</h1>
+  <form method="POST" class="w-50">
+    {% for i in 0..questions.len() %}
+    <div class="mb-3">
+      <label for="input_{{i}}" class="form-label">{{questions[i].text}}</label>
+      <textarea type="text" name="input_{{i}}" class="form-control" value="" id="input_{{i}}"></textarea>
+    </div>
+    {% endfor %}
+    <input type="submit" value="Beküldés" class="btn btn-primary position-fixed bottom-0 end-0 m-4 shadow-sm"/>
+  </form>
+</main>
+
+{% endblock %}
