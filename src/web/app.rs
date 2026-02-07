@@ -22,7 +22,7 @@ impl App {
             .route("/", get(self::get::root))
             .nest("/exit", exit_ticket::router());
 
-        let listener = tokio::net::TcpListener::bind("127.0.0.1:9090")
+        let listener = tokio::net::TcpListener::bind("0.0.0.0:9090")
             .await
             .unwrap();
         tracing::debug!("listening on {}", listener.local_addr().unwrap());
